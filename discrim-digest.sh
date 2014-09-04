@@ -3,6 +3,9 @@
 # 	EMBOSS is present and in the PATH
 #	this file has be made executable by chmod u+x emboss-commands.sh
 # 
+# Script is currently limiting to enzymes with a minimum site length of 4 nt, and that cut =< 4 
+# times. Also enzymes that have cut ambiguity in their cut-site are not allowed.
+# 
 # do restrict on it
 for i in $@
 	do

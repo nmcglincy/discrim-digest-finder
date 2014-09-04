@@ -1,4 +1,5 @@
 rm(list = ls())
+
 files = list.files(pattern = "slim_*")
 data.l = list()
 for (i in 1:length(files)) {
@@ -23,3 +24,10 @@ enz.df = enz.df[order(enz.df[,2], decreasing = TRUE),]
 write.csv(enz.df, 
           file = "number-of-sites.csv",
           row.names = FALSE)
+# 
+# fragment size analysis
+data.l
+foo = lapply(data.l, lapply, function(x) {sort(as.vector(x$X5frag, mode = "integer"))})
+str(foo)
+setdiff(foo[[1]], foo[[2]])
+foo[[1]]
