@@ -11,5 +11,7 @@ for i in $@
 # clean up output files
 for a in $(ls *.restrict)
 	do
-		sed '/^$/d;/^#/d' $a > "newfile-$a"
+		# sed '/^$/d;/^#/d' $a > "newfile-$a"
+		# removes empty and comment lines, and replaces '.' with more meaningful 'NA'
+		sed '/^$/d;/^#/d;s/\./NA/g' $a | tr -s ' ' '\t' > "newfile-$a"
 	done
