@@ -13,5 +13,6 @@ for a in $(ls *.restrict)
 	do
 		# removes empty lines, comment lines & the space at the beginning of lines
 		# replaces '.' with the more meaningful 'NA'
-		sed '/^$/d;/^#/d;s/^[ ]*//;s/\./NA/g' $a | tr -s ' ' '\t' > "newfile-$a"
+		sed '/^$/d;/^#/d;s/^[ ]*//;s/\./NA/g' $a | tr -s ' ' '\t' > "slim_$a"
 	done
+Rscript digest-comparison.R

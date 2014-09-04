@@ -1,18 +1,25 @@
-files = list.files(pattern = "newfile-*")
-rm(file)
-files
+rm(list = ls())
+files = list.files(pattern = "slim_*")
 data.l = list()
 for (i in 1:length(files)) {
 	data.l[[i]] = read.table(file = files[[i]],
-								header = TRUE,
-								colClasses = "character")
+                           header = TRUE,
+                           colClasses = "character")
 }
-str(data.l)
 names(data.l) = files
-?read.table
 data.l = lapply(data.l, function(x) {x = x[,1:9]})
 #
 # length analysis
 library(plyr)
-enz.l = lapply(data.l, dlply, .(Enzyme_name))
-str(enz.l)
+data.l = lapply(data.l, dlply, .(Enzyme_name))
+enz.l = lapply(data.l, lapply, function(x) {length(unique(x$X5frag))})
+enz.l = lapply(enz.l, ldply)
+for (i in 1:length(enz.l)) {
+  colnames(enz.l[[i]]) = c("enzyme", names(enz.l[i]))
+  enz.l[[i]]$enzyme = as.factor(enz.l[[i]]$enzyme)
+}
+enz.df = join_all(enz.l)
+enz.df = enz.df[order(enz.df[,2], decreasing = TRUE),]
+write.csv(enz.df, 
+          file = "number-of-sites.csv",
+          row.names = FALSE)
