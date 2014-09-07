@@ -8,3 +8,9 @@ X65923.embl
 *.restrict
 
 *.csv
+
+*.plist
+
+N40-enzX.exdna/sequence.txt
+
+N5-enzX.exdna/sequence.txt

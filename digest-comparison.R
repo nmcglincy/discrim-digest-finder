@@ -29,5 +29,21 @@ write.csv(enz.df,
 data.l
 foo = lapply(data.l, lapply, function(x) {sort(as.vector(x$X5frag, mode = "integer"))})
 str(foo)
+lapply(foo, unlist)
+setdiff(names(foo[[1]]), names(foo[[2]]))
+setdiff(names(foo[[2]]), names(foo[[1]]))
+setequal(names(foo[[1]]), names(foo[[2]]))
+union(names(foo[[1]]), names(foo[[2]]))
+intersect(names(foo[[1]]), names(foo[[2]]))
+?setdiff
+length(names(foo[[1]])); length(names(foo[[2]]))
 setdiff(foo[[1]], foo[[2]])
 foo[[1]]
+
+enzNames = intersect(names(foo[[1]]), names(foo[[2]]))
+abs(foo[[1]][["AatII"]] - foo[[2]][["AatII"]])
+
+for (i in enzNames) {
+	abs(foo[[1]][[i]] - foo[[2]][[i]])
+}
+?equal
