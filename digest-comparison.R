@@ -29,6 +29,27 @@ write.csv(enz.df,
 data.l
 foo = lapply(data.l, lapply, function(x) {sort(as.vector(x$X5frag, mode = "integer"))})
 str(foo)
+lapply(foo, lapply, length)
+enz.df
+
+enzNames = intersect(names(foo[[1]]), names(foo[[2]]))
+enzNames
+
+enz.df$slim_n40.restrict == enz.df$slim_n5.restrict
+# FOR THE ENZYMES THAT DON'T CHANGE IN THE NUMBER OF SITES
+tom = enz.df$enzyme[enz.df$slim_n40.restrict == enz.df$slim_n5.restrict]
+# tom = na.omit(tom)
+tom = tom[!is.na(tom)]
+class(tom)
+?na.omit
+tom
+for (i in tom) {
+  i
+  print(foo[[1]][[i]])
+  print(foo[[2]][[i]])
+}
+
+
 lapply(foo, unlist)
 setdiff(names(foo[[1]]), names(foo[[2]]))
 setdiff(names(foo[[2]]), names(foo[[1]]))
