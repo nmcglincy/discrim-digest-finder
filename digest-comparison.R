@@ -19,21 +19,31 @@ for (i in 1:length(enz.l)) {
   colnames(enz.l[[i]]) = c("enzyme", names(enz.l[i]))
   enz.l[[i]]$enzyme = as.factor(enz.l[[i]]$enzyme)
 }
-enz.df = join_all(enz.l)
+enz.df = na.omit(join_all(enz.l))
 enz.df = enz.df[order(enz.df[,2], decreasing = TRUE),]
+enz.df
 write.csv(enz.df, 
           file = "number-of-sites.csv",
           row.names = FALSE)
 # 
+str(data.l)
+str(enz.l)
+enz.df
 # fragment size analysis
 data.l
 foo = lapply(data.l, lapply, function(x) {sort(as.vector(x$X5frag, mode = "integer"))})
 str(foo)
-lapply(foo, lapply, length)
 enz.df
 
+
+lapply(foo, lapply, length)
+subset(enz.df, abs(slim_n40.restrict - slim_n5.restrict) > 0)
+str(foo)
+paste(unlist(foo$slim_n40.restrict$BalI), collapse = "_")
+foo$slim_n5.restrict$BalI
+
 enzNames = intersect(names(foo[[1]]), names(foo[[2]]))
-enzNames
+
 
 enz.df$slim_n40.restrict == enz.df$slim_n5.restrict
 # FOR THE ENZYMES THAT DON'T CHANGE IN THE NUMBER OF SITES
