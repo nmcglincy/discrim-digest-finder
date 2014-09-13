@@ -39,8 +39,20 @@ enz.df
 lapply(foo, lapply, length)
 subset(enz.df, abs(slim_n40.restrict - slim_n5.restrict) > 0)
 str(foo)
-paste(unlist(foo$slim_n40.restrict$BalI), collapse = "_")
-foo$slim_n5.restrict$BalI
+c(paste(unlist(foo$slim_n40.restrict$BalI), collapse = "_"),
+  paste(unlist(foo$slim_n5.restrict$BalI), collapse = "_"))
+
+foo[[1]][['AclI']]
+
+N5.frags = character()
+N40.frags = character()
+for (i in subset(enz.df, abs(slim_n40.restrict - slim_n5.restrict) > 0)$enzyme) {
+  N5.frags = c(N5.frags, paste(unlist(foo[[2]][[i]]), collapse = "_"))
+  N40.frags = c(N40.frags, paste(unlist(foo[[1]][[i]]), collapse = "_"))
+}
+N5.frags
+N40.frags
+
 
 enzNames = intersect(names(foo[[1]]), names(foo[[2]]))
 
