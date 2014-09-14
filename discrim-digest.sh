@@ -1,3 +1,5 @@
+# DISCRIM-DIGEST.SH V1
+# NJM, 20140913, BERKELEY CA
 # 
 # Presumes that:
 # 	EMBOSS is present and in the PATH
@@ -19,3 +21,5 @@ for a in $(ls *.restrict)
 		sed '/^$/d;/^#/d;s/^[ ]*//;s/\./NA/g' $a | tr -s ' ' '\t' > "slim_$a"
 	done
 Rscript digest-comparison.R
+# 
+# TODO - WOULD BE COOL TO BE ABLE TO SET THE MAX AND MIN NUMBER OF SITES IN OPTIONS etc.
